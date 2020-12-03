@@ -10,25 +10,6 @@
 	include_once("includes/register.inc.php");
 	$Guru = new Guru($db);
 
-	if($_POST){
-		$Guru->id_guru = $_POST["id_guru"];
-		$Guru->username = $_POST["username"];
-		$Guru->password = $_POST["password"];
-		$Guru->nama = $_POST["nama"];
-		$Guru->tgl_lahir = $_POST["tgl_lahir"];
-		$Guru->jenis_kelamin = $_POST["jenis_kelamin"];
-		$Guru->telp = $_POST["telp"];
-		$Guru->email = $_POST["email"];
-		$Guru->tempat_kelahiran = $_POST["tempat_kelahiran"];
-		$Guru->role = $_POST["role"];
-		$Guru->id_user = $_POST["id_user"];
-
-		if($Guru->insert()){
-			echo "berhasil simpan";
-		} else { 
-			echo "gagal simpan";
-		}
-	}
 ?>
 
 <body class="login-page">
@@ -55,6 +36,35 @@
 				<div class="col-md-6 col-lg-5">
 					<div class="register-box bg-white box-shadow border-radius-10">
 						<div class="wizard-content">
+							<?php
+								if($_POST){
+									$Guru->id_guru = $_POST["id_guru"];
+									$Guru->username = $_POST["username"];
+									$Guru->password = $_POST["password"];
+									$Guru->nama = $_POST["nama"];
+									$Guru->tgl_lahir = $_POST["tgl_lahir"];
+									$Guru->jenis_kelamin = $_POST["jenis_kelamin"];
+									$Guru->telp = $_POST["telp"];
+									$Guru->email = $_POST["email"];
+									$Guru->tempat_kelahiran = $_POST["tempat_kelahiran"];
+									$Guru->role = $_POST["role"];
+									$Guru->id_user = $_POST["id_user"];
+							
+									if($Guru->insertUser() && $Guru->insertGuru()){
+										echo 
+										"<div class='alert alert-success alert-dismissible' role='alert'>
+											<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+											Data Berhasil Terkirim
+										</div>";
+									} else { 
+										echo 
+										"<div class='alert alert-danger alert-dismissible' role='alert'>
+											<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+											Data Gagal Dikirim
+										</div>";
+									}
+								}
+							?>
 							<form method="POST" class="tab-wizard2 wizard-circle wizard">
 								<h5>Informasi Account</h5>
 								<section>
@@ -107,7 +117,7 @@
 											<label class="col-sm-4 col-form-label">Jenis Kelamin<span style="color:red;">*</span></label>
 											<div class="col-sm-8">
 												<div class="custom-control custom-radio custom-control-inline pb-0">
-													<input type="radio" id="male" name="jenis_kelamin" class="custom-control-input" value="laki-laki">
+													<input type="radio" id="male" name="jenis_kelamin" class="custom-control-input" value="laki">
 													<label class="custom-control-label" for="male">Pria</label>
 												</div>
 												<div class="custom-control custom-radio custom-control-inline pb-0">
@@ -125,7 +135,7 @@
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Tanggal Kelahiran<span style="color:red;">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control date-picker" name="tgl_lahir" required>
+												<input type="date" class="form-control" name="tgl_lahir" required>
 											</div>
 										</div>
 									</div>
@@ -136,9 +146,9 @@
 									<div class="modal-dialog modal-dialog-centered max-width-400" role="document">
 										<div class="modal-content">
 											<div class="modal-body text-center font-18">
-												<h3 class="mb-20">Form Submitted!</h3>
+												<h3 class="mb-20">Apa anda data yang anda kirimkan sudah benar ?</h3>
 												<div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
-												Terimakasih Telah Mendaftar !
+												<!-- Terimakasih Telah Mendaftar ! -->
 											</div>
 											<div class="modal-footer justify-content-center">
 												<!-- <a href="login.php" class="btn btn-primary">Done</a> -->

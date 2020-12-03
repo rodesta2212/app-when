@@ -20,31 +20,42 @@ class Guru {
 		$this->conn = $db;
 	}
 
-	function insert() {
-        $query = "INSERT INTO {$this->table_user} VALUES(?, ?, ?, ?)";
-        // $query = "INSERT INTO {$this->table_guru} VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	function insertUser() {
+        $query = "INSERT INTO {$this->table_user} (id_user, username, password, role) VALUES(:id_user, :username, :password, :role)";
 
         $stmt = $this->conn->prepare($query);
         // user
-        $stmt->bindParam(1, $this->id_user);
-        $stmt->bindParam(2, $this->username);
-        $stmt->bindParam(3, $this->password);
-        $stmt->bindParam(4, $this->role);
-
-        // guru
-        // $stmt->bindParam(1, $this->id_guru);
-        // $stmt->bindParam(2, $this->id_user);
-		// $stmt->bindParam(3, $this->nama);
-        // $stmt->bindParam(4, $this->tgl_lahir);
-        // $stmt->bindParam(5, $this->jenis_kelamin);
-        // $stmt->bindParam(6, $this->telp);
-        // $stmt->bindParam(7, $this->email);
-        // $stmt->bindParam(8, $this->tempat_kelahiran);
+        $stmt->bindParam(':id_user', $this->id_user);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':role', $this->role);
 
 		if ($stmt->execute()) {
 			return true;
 		} else {
-            var_dump($this->tempat_kelahiran);
+            // var_dump($this->jenis_kelamin);
+			return false;
+		}
+    }
+    
+    function insertGuru() {
+        $query = "INSERT INTO {$this->table_guru} (id_guru, id_user, nama, tgl_lahir, jenis_kelamin, telp, email, tempat_kelahiran) VALUES(:id_guru, :id_user, :nama, :tgl_lahir, :jenis_kelamin, :telp, :email, :tempat_kelahiran)";
+
+        $stmt = $this->conn->prepare($query);
+        // guru
+        $stmt->bindParam(':id_guru', $this->id_guru);
+        $stmt->bindParam(':id_user', $this->id_user);
+		$stmt->bindParam(':nama', $this->nama);
+        $stmt->bindParam(':tgl_lahir', $this->tgl_lahir);
+        $stmt->bindParam(':jenis_kelamin', $this->jenis_kelamin);
+        $stmt->bindParam(':telp', $this->telp);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':tempat_kelahiran', $this->tempat_kelahiran);
+
+		if ($stmt->execute()) {
+			return true;
+		} else {
+            // var_dump($this->jenis_kelamin);
 			return false;
 		}
 	}
