@@ -7,8 +7,12 @@
 	$config = new Config(); $db = $config->getConnection();
 
 	include("header.php");
+
+	include_once("includes/user.inc.php");
+	$User = new User($db);
+
 	include_once("includes/register.inc.php");
-	$Guru = new Guru($db);
+	$Register = new Register($db);
 
 ?>
 
@@ -38,30 +42,30 @@
 						<div class="wizard-content">
 							<?php
 								if($_POST){
-									$Guru->id_guru = $_POST["id_guru"];
-									$Guru->username = $_POST["username"];
-									$Guru->password = $_POST["password"];
-									$Guru->nama = $_POST["nama"];
-									$Guru->tgl_lahir = $_POST["tgl_lahir"];
-									$Guru->jenis_kelamin = $_POST["jenis_kelamin"];
-									$Guru->telp = $_POST["telp"];
-									$Guru->email = $_POST["email"];
-									$Guru->tempat_kelahiran = $_POST["tempat_kelahiran"];
-									$Guru->role = $_POST["role"];
-									$Guru->id_user = $_POST["id_user"];
-							
-									if($Guru->insertUser() && $Guru->insertGuru()){
-										echo 
-										"<div class='alert alert-success alert-dismissible' role='alert'>
-											<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-											Data Berhasil Terkirim
-										</div>";
+									// post guru
+									$Register->id_guru = $_POST["id_guru"];
+									$Register->nama = $_POST["nama"];
+									$Register->tgl_lahir = $_POST["tgl_lahir"];
+									$Register->jenis_kelamin = $_POST["jenis_kelamin"];
+									$Register->telp = $_POST["telp"];
+									$Register->email = $_POST["email"];
+									$Register->tempat_kelahiran = $_POST["tempat_kelahiran"];
+									$Register->id_user = $_POST["id_user"];
+
+									// post user
+									$User->id_user = $_POST["id_user"];
+									$User->username = $_POST["username"];
+									$User->password = $_POST["password"];
+									$User->role = $_POST["role"];
+
+									if($User->insert() && $Register->insert()){
+										echo '<script language="javascript">';
+										echo 'alert("Data Berhasil Terkirim")';
+										echo '</script>';
 									} else { 
-										echo 
-										"<div class='alert alert-danger alert-dismissible' role='alert'>
-											<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-											Data Gagal Dikirim
-										</div>";
+										echo '<script language="javascript">';
+										echo 'alert("Data Gagal Terkirim")';
+										echo '</script>';
 									}
 								}
 							?>
@@ -70,8 +74,8 @@
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
 										<!-- hidden form -->
-										<input type="hidden" name="id_user" value="<?php echo $Guru->getNewIdUser(); ?>">
-										<input type="hidden" name="id_guru" value="<?php echo $Guru->getNewIdGuru(); ?>">
+										<input type="hidden" name="id_user" value="<?php echo $User->getNewId(); ?>">
+										<input type="hidden" name="id_guru" value="<?php echo $Register->getNewId(); ?>">
 										<input type="hidden" name="role" value="guru">
 										<!-- hidden form -->
 										<div class="form-group row">
