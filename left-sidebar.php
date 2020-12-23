@@ -24,6 +24,11 @@
 							</a>
 						</li>
 						<li>
+							<a href="ujian.php" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-edit-file"></span><span class="mtext">Ujian</span>
+							</a>
+						</li>
+						<li>
 							<a href="jadwal-ujian.php" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Ujian</span>
 							</a>
