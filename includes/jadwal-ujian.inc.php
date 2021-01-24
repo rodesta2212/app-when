@@ -72,6 +72,7 @@ class JadwalUjian {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id_jadwal_ujian = $row['id_jadwal_ujian'];
+		$this->id_ujian = $row['id_ujian'];
         $this->tgl_ujian = $row['tgl_ujian'];
         $this->id_penguji = $row['id_penguji'];
         $this->tempat = $row['tempat'];
@@ -80,7 +81,7 @@ class JadwalUjian {
 	function update() {
 		$query = "UPDATE {$this->table_jadwal_ujian}
 			SET
-                id_jadwal_ujian = :id_jadwal_ujian,
+                id_ujian = :id_ujian,
                 tgl_ujian = :tgl_ujian,
                 id_penguji = :id_penguji,
 				tempat = :tempat
@@ -88,7 +89,7 @@ class JadwalUjian {
 				id_jadwal_ujian = :id";
         $stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':id_jadwal_ujian', $this->id_jadwal_ujian);
+		$stmt->bindParam(':id_ujian', $this->id_ujian);
         $stmt->bindParam(':tgl_ujian', $this->tgl_ujian);
         $stmt->bindParam(':id_penguji', $this->id_penguji);
         $stmt->bindParam(':tempat', $this->tempat);

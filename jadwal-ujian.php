@@ -88,8 +88,8 @@
 									<td><?=$row['tempat']?></td>
 									<td>
                                         <!-- <a class="dropdown-item link-action" href="ujian-detail.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
-										<a class="dropdown-item link-action" href="ujian-update.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
-										<a class="dropdown-item link-action" href="ujian-delete.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
+										<a class="dropdown-item link-action" href="jadwal-ujian-update.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
+										<a class="dropdown-item link-action" href="jadwal-ujian-delete.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
 									</td>
 								</tr>
                                 <?php endwhile; ?>

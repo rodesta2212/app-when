@@ -68,24 +68,19 @@ class Ujian {
 		$this->id_ujian = $row['id_ujian'];
         $this->nama = $row['nama'];
         $this->nilai_lulus = $row['nilai_lulus'];
-        $this->telp = $row['telp'];
 	}
 
 	function update() {
 		$query = "UPDATE {$this->table_ujian}
 			SET
-                id_ujian = :id_ujian,
                 nama = :nama,
-                nilai_lulus = :nilai_lulus,
-				telp = :telp
+                nilai_lulus = :nilai_lulus
 			WHERE
 				id_ujian = :id";
         $stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':id_ujian', $this->id_ujian);
         $stmt->bindParam(':nama', $this->nama);
         $stmt->bindParam(':nilai_lulus', $this->nilai_lulus);
-        $stmt->bindParam(':telp', $this->telp);
         $stmt->bindParam(':id', $this->id_ujian);
 
 		if ($stmt->execute()) {

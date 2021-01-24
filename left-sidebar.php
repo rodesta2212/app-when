@@ -11,6 +11,11 @@
 		<div class="menu-block customscroll">
 			<div class="sidebar-menu">
 				<ul id="accordion-menu">
+					<li>
+						<a href="index.php" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-home"></span><span class="mtext">Home</span>
+						</a>
+					</li>
 					<?php if ($_SESSION['role'] == 'dikdasmen'): ?>
 						<!-- Dikdasmen -->
 						<li>
@@ -42,7 +47,7 @@
 						</li>
 						<li>
 							<a href="hasil-ujian.php" class="dropdown-toggle no-arrow">
-								<span class="micon dw dw-analytics5"></span><span class="mtext">Hasil Ujian</span>
+								<span class="micon dw dw-analytics-5"></span><span class="mtext">Hasil Ujian</span>
 							</a>
 						</li>
 					<?php else: ?>

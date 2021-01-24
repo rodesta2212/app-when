@@ -36,11 +36,6 @@
 						<h4 class="text-blue h4"><i class="dw dw-mortarboard"></i> Data Guru</h4>
 						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
 					</div>
-                    <div style="padding-right:15px;">
-                        <a href="guru-create">
-                            <button type="button" class="btn btn-success float-right">Tambah</button>
-                        </a>
-                    </div>
 					<div class="pb-20">
 						<table class="data-table table stripe hover nowrap">
 							<thead>
@@ -49,8 +44,7 @@
 									<th>Nama</th>
                                     <th>Alamat</th>
                                     <th>No Telp</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
+                                    <th>Status</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -61,10 +55,9 @@
 									<td><?=$row['nama']?></td>
                                     <td><?=$row['alamat']?></td>
                                     <td><?=$row['telp']?></td>
-                                    <td><?=$row['username']?></td>
-                                    <td><?=$row['password']?></td>
+                                    <td><?=$row['status']?></td>
 									<td>
-                                        <a class="dropdown-item link-action" href="guru-detail.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> | 
+                                        <!-- <a class="dropdown-item link-action" href="guru-detail.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
 										<a class="dropdown-item link-action" href="guru-update.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
 										<a class="dropdown-item link-action" href="guru-delete.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
 									</td>

@@ -54,6 +54,18 @@ class User {
         return $key . $new;
 	}
 
+	function readOne() {
+		$query = "SELECT * FROM {$this->table_user} WHERE id_user=:id_user LIMIT 0,1";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':id_user', $this->id_user);
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$this->id_user = $row['id_user'];
+        $this->username = $row['username'];
+        $this->password = $row['password'];
+	}
+
     function delete() {
 		$query = "DELETE FROM {$this->table_user} WHERE id_user = ?";
 		$stmt = $this->conn->prepare($query);

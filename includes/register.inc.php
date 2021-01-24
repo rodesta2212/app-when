@@ -31,6 +31,7 @@ class Register {
         $stmt->bindParam(':tempat_kelahiran', $this->tempat_kelahiran);
 
 		if ($stmt->execute()) {
+            // var_dump($stmt);
 			return true;
 		} else {
             // var_dump($this->jenis_kelamin);
