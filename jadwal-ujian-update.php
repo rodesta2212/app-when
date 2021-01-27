@@ -48,7 +48,8 @@
 			if ($JadwalUjian->update()) {
 				echo '<script language="javascript">';
                 echo 'alert("Data Berhasil Terkirim")';
-                echo '</script>';
+				echo '</script>';
+				echo "<script>location.href='jadwal-ujian.php'</script>";
 			} else {
 				echo '<script language="javascript">';
                 echo 'alert("Data Gagal Terkirim")';

@@ -108,7 +108,7 @@ class Guru {
 				jenis_kelamin = :jenis_kelamin,
 				telp = :telp,
 				email = :email,
-				tempat = :kelahiran,
+				tempat_kelahiran = :tempat_kelahiran,
 				agama = :agama,
 				pendidikan = :pendidikan,
 				nama_lembaga = :nama_lembaga,

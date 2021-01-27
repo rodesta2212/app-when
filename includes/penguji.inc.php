@@ -56,7 +56,7 @@ class Penguji {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_penguji, A.nama, A.alamat, A.telp, B.username, B.password  FROM {$this->table_penguji} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_penguji ASC";
+		$query = "SELECT A.id_penguji, A.id_user, A.nama, A.alamat, A.telp, B.username, B.password  FROM {$this->table_penguji} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_penguji ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 

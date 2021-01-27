@@ -63,7 +63,32 @@ class User {
 
 		$this->id_user = $row['id_user'];
         $this->username = $row['username'];
-        $this->password = $row['password'];
+		$this->password = $row['password'];
+		$this->role = $row['role'];
+	}
+
+	function update() {
+		$query = "UPDATE {$this->table_user}
+			SET
+                id_user = :id_user,
+                username = :username,
+				password = :password,
+				role = :role
+			WHERE
+				id_user = :id_user";
+        $stmt = $this->conn->prepare($query);
+
+		$stmt->bindParam(':id_user', $this->id_user);
+        $stmt->bindParam(':username', $this->username);
+		$stmt->bindParam(':password', $this->password);
+		$stmt->bindParam(':role', $this->role);
+        $stmt->bindParam(':id_user', $this->id_user);
+
+		if ($stmt->execute()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
     function delete() {

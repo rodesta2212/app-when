@@ -28,6 +28,7 @@
 
 <body>
 	<!-- head navbar -->
+	<?php include("head-navbar.php"); ?>
 
 	<!-- right sidebar -->
 	<?php include("right-sidebar.php"); ?>
@@ -67,7 +68,8 @@
 			if ($Guru->update()) {
 				echo '<script language="javascript">';
                 echo 'alert("Data Berhasil Terkirim")';
-                echo '</script>';
+				echo '</script>';
+				echo "<script>location.href='index.php'</script>";
 			} else {
 				echo '<script language="javascript">';
                 echo 'alert("Data Gagal Terkirim")';
@@ -152,7 +154,7 @@
 											<div class="profile-setting">
 												<form method="POST" enctype="multipart/form-data">
 												<!-- hidden -->
-												<input type="text" name="id_guru" value="<?php echo $Guru->id_guru; ?>">
+												<input type="hidden" name="id_guru" value="<?php echo $Guru->id_guru; ?>">
 													<ul class="profile-edit-list row">
 														<li class="weight-500 col-md-6">
 															<h4 class="text-blue h5 mb-20">Edit Profil</h4>
