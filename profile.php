@@ -39,6 +39,34 @@
 	<div class="mobile-menu-overlay"></div>
 
 	<?php
+		// gambar fc izajah
+		if(isset($_FILES['fc_ijazah'])){
+			$errors= array();
+			$file_name = str_replace(" ", "-", $_FILES['fc_ijazah']['name']);
+			$file_size =$_FILES['fc_ijazah']['size'];
+			$file_tmp =$_FILES['fc_ijazah']['tmp_name'];
+			$file_type=$_FILES['fc_ijazah']['type'];
+			$tmp = explode('.', $file_name);
+			$file_extension = end($tmp);
+			$extensions= array("jpeg","jpg","png","pdf");
+			
+			if(in_array($file_extension,$extensions)=== false){
+				$errors[]="extension not allowed, please choose a JPEG or PNG file.";
+			}
+			
+			if($file_size > 20097152){
+				$errors[]='File size must be excately 20 MB';
+			}
+			
+			if(empty($errors)==true){
+				move_uploaded_file($file_tmp,"upload/".$file_name);
+				// echo "Success";
+				
+			}else{
+				print_r($errors);
+			}
+		}
+		
 		if ($_POST) {
 			$Guru->id_guru = $_POST["id_guru"];
 			$Guru->nama = $_POST["nama"];
@@ -53,7 +81,7 @@
 			$Guru->tahun_ijazah = $_POST["tahun_ijazah"];
 			$Guru->jumlah_program_study = $_POST["jumlah_program_study"];
 			$Guru->alamat = $_POST["alamat"];
-			$Guru->fc_ijazah = $_POST["fc_ijazah"];
+			$Guru->fc_ijazah = $file_name;
 			$Guru->status_perkawinan= $_POST["status_perkawinan"];
 			$Guru->tanggal_mulai_bertugas = $_POST["tanggal_mulai_bertugas"];
 			$Guru->fc_sk_sekolah = $_POST["fc_sk_sekolah"];
@@ -61,21 +89,24 @@
 			$Guru->fc_kartu_anggota_muhammadiyah = $_POST["fc_kartu_anggota_muhammadiyah"];
 			$Guru->fc_kartu_keluarga = $_POST["fc_kartu_keluarga"];
 			$Guru->sk_membaca_alquran = $_POST["sk_membaca_alquran"];
-			$Guru->sk_lulus_tes_muhammadiyah = $_POST["sk_lulus_tes_muhammadiyah"];
 			$Guru->sk_aktif_kegiatan_muhammadiyah = $_POST["sk_aktif_kegiatan_muhammadiyah"];
 			$Guru->sk_pernyataan_ketentuan_dikdasmen = $_POST["sk_pernyataan_ketentuan_dikdasmen"];
 			$Guru->tingkatan = $_POST["tingkatan"];
+
+			// var_dump($_FILES['fc_ijazah']['name']);
+
 			if ($Guru->update()) {
 				echo '<script language="javascript">';
-                echo 'alert("Data Berhasil Terkirim")';
+				echo 'alert("Data Berhasil Terkirim")';
 				echo '</script>';
 				echo "<script>location.href='index.php'</script>";
 			} else {
 				echo '<script language="javascript">';
-                echo 'alert("Data Gagal Terkirim")';
-                echo '</script>';
+				echo 'alert("Data Gagal Terkirim")';
+				echo '</script>';
 			}
 		}
+
 	?>
 
 	<div class="main-container">
@@ -152,7 +183,7 @@
 										<!-- Setting Tab start -->
 										<div class="tab-pane fade show active" id="setting" role="tabpanel">
 											<div class="profile-setting">
-												<form method="POST" enctype="multipart/form-data">
+												<form method="post" enctype="multipart/form-data">
 												<!-- hidden -->
 												<input type="hidden" name="id_guru" value="<?php echo $Guru->id_guru; ?>">
 													<ul class="profile-edit-list row">
@@ -212,7 +243,11 @@
 															</div>
 															<div class="form-group">
 																<label>Pendidikan</label>
-																<input class="form-control form-control-lg" type="text" name="pendidikan" value="<?php echo $Guru->pendidikan; ?>">
+																<select class="selectpicker form-control form-control-lg" data-style="btn-outline-secondary btn-lg" title="Not Chosen" name="pendidikan">
+																	<option value="D3" <?php if($Guru->pendidikan == 'D3'): ?> selected <?php endif; ?>>D3</option>
+																	<option value="S1" <?php if($Guru->pendidikan == 'S1'): ?> selected <?php endif; ?> >S1</option>
+																	<option value="S2" <?php if($Guru->pendidikan == 'S2'): ?> selected <?php endif; ?> >S2</option>
+																</select>
 															</div>
 															<div class="form-group">
 																<label>Nama lembaga</label>
@@ -254,7 +289,7 @@
 															<h4 class="text-blue h5 mb-20">Edit Lampiran</h4>
 															<div class="form-group">
 																<label>FC Ijazah:</label>
-																<input class="form-control form-control-lg" type="text" name="fc_ijazah" value="<?php echo $Guru->fc_ijazah; ?>">
+																<input type="file" class="form-control form-control-lg" name="fc_ijazah" accept="image/*">
 															</div>
 															<div class="form-group">
 																<label>Fc Sk Sekolah:</label>
@@ -275,10 +310,6 @@
 															<div class="form-group">
 																<label>Sk Membaca Al Quran:</label>
 																<input class="form-control form-control-lg" type="text" name="sk_membaca_alquran" value="<?php echo $Guru->sk_membaca_alquran; ?>">
-															</div>
-															<div class="form-group">
-																<label>SK Lulus Tes Muhammadiyah:</label>
-																<input class="form-control form-control-lg" type="text" name="sk_lulus_tes_muhammadiyah" value="<?php echo $Guru->sk_lulus_tes_muhammadiyah; ?>">
 															</div>
 															<div class="form-group">
 																<label>Sk Aktif Kegiatan Muhammadiyah:</label>

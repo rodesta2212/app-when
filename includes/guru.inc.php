@@ -92,7 +92,6 @@ class Guru {
 		$this->fc_kartu_anggota_muhammadiyah = $row['fc_kartu_anggota_muhammadiyah'];
 		$this->fc_kartu_keluarga = $row['fc_kartu_keluarga'];
 		$this->sk_membaca_alquran = $row['sk_membaca_alquran'];
-		$this->sk_lulus_tes_muhammadiyah = $row['sk_lulus_tes_muhammadiyah'];
 		$this->sk_aktif_kegiatan_muhammadiyah = $row['sk_aktif_kegiatan_muhammadiyah'];
 		$this->sk_pernyataan_ketentuan_dikdasmen = $row['sk_pernyataan_ketentuan_dikdasmen'];
 		$this->status = $row['status'];
@@ -123,7 +122,6 @@ class Guru {
 				fc_kartu_anggota_muhammadiyah = :fc_kartu_anggota_muhammadiyah,
 				fc_kartu_keluarga = :fc_kartu_keluarga,
 				sk_membaca_alquran = :sk_membaca_alquran,
-				sk_lulus_tes_muhammadiyah = :sk_lulus_tes_muhammadiyah,
 				sk_aktif_kegiatan_muhammadiyah = :sk_aktif_kegiatan_muhammadiyah,
 				sk_pernyataan_ketentuan_dikdasmen = :sk_pernyataan_ketentuan_dikdasmen,
 				tingkatan = :tingkatan
@@ -152,12 +150,11 @@ class Guru {
 			$stmt->bindParam(':fc_kartu_anggota_muhammadiyah', $this->fc_kartu_anggota_muhammadiyah);
 			$stmt->bindParam(':fc_kartu_keluarga', $this->fc_kartu_keluarga);
 			$stmt->bindParam(':sk_membaca_alquran', $this->sk_membaca_alquran);
-			$stmt->bindParam(':sk_lulus_tes_muhammadiyah', $this->sk_lulus_tes_muhammadiyah);
 			$stmt->bindParam(':sk_aktif_kegiatan_muhammadiyah', $this->sk_aktif_kegiatan_muhammadiyah);
 			$stmt->bindParam(':sk_pernyataan_ketentuan_dikdasmen', $this->sk_pernyataan_ketentuan_dikdasmen);
 			$stmt->bindParam(':tingkatan', $this->tingkatan);
 			$stmt->bindParam(':id', $this->id_guru);
-
+			
 		if ($stmt->execute()) {
 			return true;
 		} else {
