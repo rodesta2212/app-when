@@ -158,7 +158,6 @@ class Guru {
 		if ($stmt->execute()) {
 			return true;
 		} else {
-	    var_dump($this->jenis_kelamin);
 			return false;
 		}
 	}
