@@ -57,8 +57,8 @@
                                     <td><?=$row['telp']?></td>
                                     <td><?=$row['status']?></td>
 									<td>
-                                        <!-- <a class="dropdown-item link-action" href="guru-detail.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
-										<a class="dropdown-item link-action" href="guru-update.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
+                                        <a class="dropdown-item link-action" href="guru-verifikasi.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> | 
+										<!-- <a class="dropdown-item link-action" href="guru-update.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-edit-1"></i> Edit</a> |  -->
 										<a class="dropdown-item link-action" href="guru-delete.php?id=<?php echo $row['id_guru']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
 									</td>
 								</tr>
