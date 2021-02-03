@@ -41,8 +41,8 @@
 					<?php elseif ($_SESSION['role'] == 'guru'): ?>
 						<!-- Guru -->
 						<li>
-							<a href="jadwal-ujian.php" class="dropdown-toggle no-arrow">
-								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Ujian</span>
+							<a href="jadwal-guru.php?id=<?php echo $_SESSION['id_guru']; ?>" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Guru</span>
 							</a>
 						</li>
 						<li>
