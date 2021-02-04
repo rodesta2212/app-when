@@ -38,6 +38,11 @@
 								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Ujian</span>
 							</a>
 						</li>
+						<li>
+							<a href="jadwal-guru-admin.php" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Guru</span>
+							</a>
+						</li>
 					<?php elseif ($_SESSION['role'] == 'guru'): ?>
 						<!-- Guru -->
 						<li>

@@ -5,6 +5,7 @@ class JadwalGuru {
 	private $table_jadwal_ujian = 'jadwal_ujian';
 	private $table_ujian = 'ujian';
 	private $table_penguji = 'penguji';
+	private $table_guru = 'guru';
 
     public $id_jadwal_guru;
     public $id_jadwal_ujian;
@@ -58,10 +59,11 @@ class JadwalGuru {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, D.nama AS nama_penguji
+		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, D.nama AS nama_penguji, E.nama AS nama_guru
 		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
 		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
 		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
 		ORDER BY id_jadwal_guru DESC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
@@ -83,34 +85,38 @@ class JadwalGuru {
 	}
 
 	function readOne() {
-		$query = "SELECT * FROM {$this->table_jadwal_guru} WHERE id_jadwal_guru=:id_jadwal_guru LIMIT 0,1";
+		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.id_jadwal_ujian, B.tgl_ujian, B.tempat, C.id_ujian, D.id_penguji
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		WHERE id_jadwal_guru=:id_jadwal_guru LIMIT 0,1";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':id_jadwal_guru', $this->id_jadwal_guru);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id_jadwal_guru = $row['id_jadwal_guru'];
+		$this->id_jadwal_ujian = $row['id_jadwal_ujian'];
 		$this->id_ujian = $row['id_ujian'];
         $this->tgl_ujian = $row['tgl_ujian'];
         $this->id_penguji = $row['id_penguji'];
-        $this->tempat = $row['tempat'];
+		$this->tempat = $row['tempat'];
+		$this->status = $row['status'];
 	}
 
 	function update() {
 		$query = "UPDATE {$this->table_jadwal_guru}
 			SET
-                id_ujian = :id_ujian,
-                tgl_ujian = :tgl_ujian,
-                id_penguji = :id_penguji,
-				tempat = :tempat
+                id_jadwal_ujian = :id_jadwal_ujian,
+                id_guru = :id_guru,
+				status = :status
 			WHERE
 				id_jadwal_guru = :id";
         $stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':id_ujian', $this->id_ujian);
-        $stmt->bindParam(':tgl_ujian', $this->tgl_ujian);
-        $stmt->bindParam(':id_penguji', $this->id_penguji);
-        $stmt->bindParam(':tempat', $this->tempat);
+		$stmt->bindParam(':id_jadwal_ujian', $this->id_jadwal_ujian);
+        $stmt->bindParam(':id_guru', $this->id_guru);
+        $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':id', $this->id_jadwal_guru);
 
 		if ($stmt->execute()) {

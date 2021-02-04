@@ -10,12 +10,12 @@
     $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
     $JadwalGuru = new JadwalGuru($db);
-    $JadwalGuru->id_JadwalGuru = $id;
+    $JadwalGuru->id_jadwal_guru = $id;
 
     if($JadwalGuru->delete()){
-        echo "<script>location.href='jadwal-guru.php';</script>";
+        echo "<script>location.href='jadwal-guru-admin.php';</script>";
     } else{
-        echo "<script>alert('Gagal Hapus Data');location.href='jadwal-guru.php';</script>";
+        echo "<script>alert('Gagal Hapus Data');location.href='jadwal-guru-admin.php';</script>";
     }
 
 ?>
