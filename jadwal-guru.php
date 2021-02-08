@@ -10,7 +10,10 @@
 	if (!isset($_SESSION['id_user'])) echo "<script>location.href='login.php'</script>";
     $config = new Config(); $db = $config->getConnection();
 
+	$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+
 	$JadwalGuru = new JadwalGuru($db);
+	$JadwalGuru->id_guru = $id;
 	$JadwalUjian = new JadwalUjian($db);
 ?>
 

@@ -71,12 +71,42 @@ class JadwalGuru {
 		return $stmt;
 	}
 
+	function readAllVerifikasi() {
+		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, C.nilai_lulus, D.nama AS nama_penguji, E.nama AS nama_guru
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' && B.id_penguji=:id_penguji
+		ORDER BY id_jadwal_guru DESC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(':id_penguji', $this->id_penguji);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function readAllGuru() {
 		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, D.nama AS nama_penguji
 		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
 		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
 		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
 		WHERE A.id_guru=:id_guru ORDER BY id_jadwal_guru DESC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(':id_guru', $this->id_guru);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	function readAllNilai() {
+		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, C.nilai_lulus, D.nama AS nama_penguji, E.nama AS nama_guru
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' && A.id_guru=:id_guru
+		ORDER BY id_jadwal_guru DESC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->bindParam(':id_guru', $this->id_guru);
 		$stmt->execute();
@@ -125,7 +155,31 @@ class JadwalGuru {
 			return false;
 		}
 	}
-	
+
+	function updateNilai() {
+		$query = "UPDATE {$this->table_jadwal_guru}
+			SET
+                id_jadwal_ujian = :id_jadwal_ujian,
+                id_guru = :id_guru,
+				status = :status,
+				nilai = :nilai
+			WHERE
+				id_jadwal_guru = :id";
+        $stmt = $this->conn->prepare($query);
+
+		$stmt->bindParam(':id_jadwal_ujian', $this->id_jadwal_ujian);
+        $stmt->bindParam(':id_guru', $this->id_guru);
+        $stmt->bindParam(':status', $this->status);
+		$stmt->bindParam(':nilai', $this->nilai);
+        $stmt->bindParam(':id', $this->id_jadwal_guru);
+
+		if ($stmt->execute()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	function delete() {
 		$query = "DELETE FROM {$this->table_jadwal_guru} WHERE id_jadwal_guru = ?";
 		$stmt = $this->conn->prepare($query);

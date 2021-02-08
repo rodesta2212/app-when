@@ -51,20 +51,15 @@
 							</a>
 						</li>
 						<li>
-							<a href="hasil-ujian.php" class="dropdown-toggle no-arrow">
+							<a href="hasil-ujian.php?id=<?php echo $_SESSION['id_guru']; ?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-analytics-5"></span><span class="mtext">Hasil Ujian</span>
 							</a>
 						</li>
 					<?php else: ?>
 						<!-- Penguji -->
 						<li>
-							<a href="jadwal-ujian.php" class="dropdown-toggle no-arrow">
+							<a href="jadwal-guru-nilai.php?id=<?php echo $_SESSION['id_penguji']; ?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Ujian</span>
-							</a>
-						</li>
-						<li>
-							<a href="hasil-ujian.php" class="dropdown-toggle no-arrow">
-								<span class="micon dw dw-analytics5"></span><span class="mtext">Hasil Ujian</span>
 							</a>
 						</li>
 					<?php endif; ?>
