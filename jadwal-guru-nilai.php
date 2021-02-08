@@ -65,7 +65,7 @@
 									<td>
 										<?php if($row['nilai'] == null): ?>
 											Belum di nilai
-										<?php elseif($row['nilai'] >= $row['nilai_lulus']): ?>
+										<?php else: ?>
 											<?=$row['nilai']?>
 										<?php endif; ?>
 									</td>
