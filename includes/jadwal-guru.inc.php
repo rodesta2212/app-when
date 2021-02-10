@@ -114,24 +114,21 @@ class JadwalGuru {
 		return $stmt;
 	}
 
-	function readOne() {
-		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.id_jadwal_ujian, B.tgl_ujian, B.tempat, C.id_ujian, D.id_penguji
+	function readOneNilai() {
+		$query = "SELECT AVG(nilai) AS avg_nilai, AVG(nilai_lulus) AS avg_nilai_lulus
 		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
 		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
 		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
-		WHERE id_jadwal_guru=:id_jadwal_guru LIMIT 0,1";
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' && A.id_guru=:id_guru
+		ORDER BY id_jadwal_guru DESC";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':id_jadwal_guru', $this->id_jadwal_guru);
+		$stmt->bindParam(':id_guru', $this->id_guru);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		$this->id_jadwal_guru = $row['id_jadwal_guru'];
-		$this->id_jadwal_ujian = $row['id_jadwal_ujian'];
-		$this->id_ujian = $row['id_ujian'];
-        $this->tgl_ujian = $row['tgl_ujian'];
-        $this->id_penguji = $row['id_penguji'];
-		$this->tempat = $row['tempat'];
-		$this->status = $row['status'];
+		$this->avg_nilai = $row['avg_nilai'];
+		$this->avg_nilai_lulus = $row['avg_nilai_lulus'];
 	}
 
 	function update() {

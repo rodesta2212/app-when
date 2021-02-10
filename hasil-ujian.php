@@ -14,6 +14,7 @@
 
 	$JadwalGuru = new JadwalGuru($db);
 	$JadwalGuru->id_guru = $id;
+	$JadwalGuru->readOneNilai();
 	$JadwalUjian = new JadwalUjian($db);
 ?>
 
@@ -39,7 +40,18 @@
 				<div class="card-box mb-30">
 					<div class="pd-20">
 						<h4 class="text-blue h4"><i class="dw dw-edit-file"></i> Jadwal</h4>
-						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
+						<?php if($JadwalGuru->avg_nilai >= $JadwalGuru->avg_nilai_lulus): ?>
+							<p class="mb-0">
+								Anda Lulus <br/>
+								Nilai Akhir : <?php echo $JadwalGuru->avg_nilai; ?>
+							</p>
+						<?php else: ?>
+							<p class="mb-0">
+								Maaf Anda Tidak Lulus <br/>
+								Nilai Akhir : <?php echo $JadwalGuru->avg_nilai; ?>
+							</p>
+						<?php endif; ?>
+
                     </div>
                     <div class="pb-20">
 						<table class="data-table table stripe hover nowrap">
@@ -59,15 +71,7 @@
 									<td><?=$row['nama_ujian']?></td>
                                     <td><?=$row['tgl_ujian']?></td>
 									<td><?=$row['tempat']?></td>
-									<td>
-										<?php if($row['nilai'] == null): ?>
-											Belum di nilai
-										<?php elseif($row['nilai'] >= $row['nilai_lulus']): ?>
-											<?=$row['nilai']?>
-										<?php elseif($row['nilai'] < $row['nilai_lulus']): ?>
-											Tidak Lulus
-										<?php endif; ?>
-									</td>
+									<td><?=$row['nilai']?></td>
 								</tr>
 								<?php 
 									$no++;

@@ -76,7 +76,7 @@
 									<th>Penguji</th>
 									<th>Tempat</th>
 									<th>Status</th>
-									<th>Action</th>
+									<!-- <th>Action</th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -88,11 +88,11 @@
 									<td><?=$row['nama_penguji']?></td>
 									<td><?=$row['tempat']?></td>
 									<td><?=$row['status']?></td>
-									<td>
-                                        <!-- <a class="dropdown-item link-action" href="ujian-detail.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
+									<!-- <td>
+                                        <a class="dropdown-item link-action" href="ujian-detail.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-eye"></i> Detail</a> | 
 										<a class="dropdown-item link-action" href="jadwal-ujian-update.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
 										<a class="dropdown-item link-action" href="jadwal-ujian-delete.php?id=<?php echo $row['id_jadwal_ujian']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
-									</td>
+									</td> -->
 								</tr>
 								<?php 
 									$no++;
