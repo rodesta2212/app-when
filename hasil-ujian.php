@@ -40,7 +40,7 @@
 				<div class="card-box mb-30">
 					<div class="pd-20">
 						<h4 class="text-blue h4"><i class="dw dw-edit-file"></i> Jadwal</h4>
-						<?php elseif($JadwalGuru->avg_nilai == 0 ): ?>
+						<?php if($JadwalGuru->avg_nilai == 0 ): ?>
 							<p class="mb-0">
 								Belum ada Penilaian
 							</p>

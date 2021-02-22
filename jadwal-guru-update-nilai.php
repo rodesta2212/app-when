@@ -53,6 +53,7 @@
 				echo '<script language="javascript">';
                 echo 'alert("Data Berhasil Terkirim")';
 				echo '</script>';
+				
 			} else {
 				echo '<script language="javascript">';
                 echo 'alert("Data Gagal Terkirim")';

@@ -132,6 +132,7 @@ class JadwalGuru {
         $this->id_penguji = $row['id_penguji'];
 		$this->tempat = $row['tempat'];
 		$this->status = $row['status'];
+		$this->id_guru = $row['id_guru'];
 	}
 
 	function readOneNilai() {
