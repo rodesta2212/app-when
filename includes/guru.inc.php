@@ -63,6 +63,14 @@ class Guru {
 		return $stmt;
 	}
 
+	function readAllVerifikasi() {
+		$query = "SELECT A.id_guru, A.nama, A.alamat, A.telp, B.id_user, B.username, B.password, A.status  FROM {$this->table_guru} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user WHERE A.status = 'verifikasi' ORDER BY id_guru ASC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function readOne() {
 		$query = "SELECT * FROM {$this->table_guru} WHERE id_guru=:id_guru LIMIT 0,1";
 		$stmt = $this->conn->prepare($query);
