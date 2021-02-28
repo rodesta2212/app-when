@@ -38,45 +38,28 @@
 				<!-- Simple Datatable start -->
 				<div class="card-box mb-30">
 					<div class="pd-20">
-						<h4 class="text-blue h4"><i class="dw dw-edit-file"></i> Upload Nilai </h4>
+						<h4 class="text-blue h4"><i class="dw dw-edit-file"></i> Jadwal</h4>
 						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
                     </div>
                     <div class="pb-20">
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>No</th>
-									<th>Guru</th>
-									<th>Ujian</th>
-                                    <th>Tgl dan Waktu</th>
-									<th>Tempat</th>
-									<th>Nilai</th>
-									<th>Action</th>
+                                    <th>No</th>
+									<th>Nama Guru</th>
+                                    <th>Nilai Rata - Rata</th>
+                                    <th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
-                                <?php $no=1; $jadwalgurus = $JadwalGuru->readAllVerifikasi(); while ($row = $jadwalgurus->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <?php $no=1; $jadwalgurus = $JadwalGuru->readAllHasilPenguji(); while ($row = $jadwalgurus->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$no?></td>
+                                    <td><?=$no?></td>
 									<td><?=$row['nama_guru']?></td>
-									<td><?=$row['nama_ujian']?></td>
-                                    <td><?=$row['tgl_ujian']?></td>
-									<td><?=$row['tempat']?></td>
-									<td>
-										<?php if($row['nilai'] == null): ?>
-											Belum di nilai
-										<?php else: ?>
-											<?=$row['nilai']?>
-										<?php endif; ?>
-									</td>
-									<td>
-										<a class="dropdown-item link-action" href="jadwal-guru-update-nilai.php?id=<?php echo $row['id_jadwal_guru']; ?>"><i class="dw dw-edit-1"></i> Nilai</a>
-									</td>
+                                    <td><?=$row['avg_nilai']?></td>
+                                    <td><?=$row['keterangan']?></td>
 								</tr>
-								<?php 
-									$no++;
-									endwhile; 
-								?>
+                                <?php $no++; endwhile; ?>
 							</tbody>
 						</table>
 					</div>

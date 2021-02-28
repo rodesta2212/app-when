@@ -1,7 +1,7 @@
 <head>
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
-	<title>App When - Wisuda April 2020 Amin !</title>
+	<title>Sistem Informasi Pengangkatan Guru</title>
 
 	<!-- Site favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">

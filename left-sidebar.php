@@ -43,6 +43,16 @@
 								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Guru</span>
 							</a>
 						</li>
+						<li>
+							<a href="laporan-peserta.php" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-analytics-1"></span><span class="mtext">Laporan Peserta Seleksi</span>
+							</a>
+						</li>
+						<li>
+							<a href="laporan-hasil.php" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-analytics-11"></span><span class="mtext">Laporan Hasil Ujian</span>
+							</a>
+						</li>
 					<?php elseif ($_SESSION['role'] == 'guru'): ?>
 						<!-- Guru -->
 						<li>
@@ -59,7 +69,17 @@
 						<!-- Penguji -->
 						<li>
 							<a href="jadwal-guru-nilai.php?id=<?php echo $_SESSION['id_penguji']; ?>" class="dropdown-toggle no-arrow">
-								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Ujian</span>
+								<span class="micon dw dw-pencil"></span><span class="mtext">Upload Nilai</span>
+							</a>
+						</li>
+						<li>
+							<a href="jadwal-guru-penguji.php?id=<?php echo $_SESSION['id_penguji']; ?>" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-calendar1"></span><span class="mtext">Jadwal Penguji</span>
+							</a>
+						</li>
+						<li>
+							<a href="laporan-hasil-penguji.php?id=<?php echo $_SESSION['id_penguji']; ?>" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-analytics-11"></span><span class="mtext">Hasil Ujian</span>
 							</a>
 						</li>
 					<?php endif; ?>

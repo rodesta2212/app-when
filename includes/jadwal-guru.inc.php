@@ -1,4 +1,4 @@
-<?php
+4<?php
 class JadwalGuru {
 	private $conn;
 	private $table_jadwal_guru = 'jadwal_guru';
@@ -79,6 +79,54 @@ class JadwalGuru {
 		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
 		WHERE A.status='verifikasi' && B.id_penguji=:id_penguji
 		ORDER BY id_jadwal_guru DESC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(':id_penguji', $this->id_penguji);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	function readAllPenguji() {
+		$query = "SELECT A.id_jadwal_guru, A.id_guru, A.status, A.nilai, B.tgl_ujian, B.tempat, C.nama AS nama_ujian, C.nilai_lulus, D.nama AS nama_penguji, E.nama AS nama_guru
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' && B.id_penguji=:id_penguji
+		GROUP BY B.tgl_ujian
+		ORDER BY id_jadwal_guru DESC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(':id_penguji', $this->id_penguji);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	function readAllHasilPenguji() {
+		$query = "SELECT E.nama AS nama_guru, AVG(nilai) AS avg_nilai, AVG(nilai_lulus) AS avg_nilai_lulus, IF(AVG(nilai)>=AVG(nilai_lulus), 'Lulus', 'Tidak Lulus') AS keterangan
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' && B.id_penguji=:id_penguji
+		GROUP BY nama_guru
+		ORDER BY nama_guru ASC";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(':id_penguji', $this->id_penguji);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
+	function readAllHasil() {
+		$query = "SELECT E.nama AS nama_guru, AVG(nilai) AS avg_nilai, AVG(nilai_lulus) AS avg_nilai_lulus, IF(AVG(nilai)>=AVG(nilai_lulus), 'Lulus', 'Tidak Lulus') AS keterangan
+		FROM {$this->table_jadwal_guru} A LEFT JOIN {$this->table_jadwal_ujian} B ON A.id_jadwal_ujian=B.id_jadwal_ujian 
+		LEFT JOIN {$this->table_ujian} C ON B.id_ujian=C.id_ujian
+		LEFT JOIN {$this->table_penguji} D ON B.id_penguji=D.id_penguji 
+		LEFT JOIN {$this->table_guru} E ON A.id_guru=E.id_guru 
+		WHERE A.status='verifikasi' 
+		GROUP BY nama_guru
+		ORDER BY nama_guru ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->bindParam(':id_penguji', $this->id_penguji);
 		$stmt->execute();
